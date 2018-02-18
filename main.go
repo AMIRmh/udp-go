@@ -1,2 +1,0 @@
-package udp_go
-
