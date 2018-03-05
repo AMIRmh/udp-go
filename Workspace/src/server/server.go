@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"fmt"
@@ -9,13 +9,19 @@ import (
 	"os"
 )
 
-const host_server = "localhost"
-const port_server = ":1313"
-const PACKET_SIZE = 512
-var udpAddr *net.UDPAddr
-var pc *net.UDPConn
-var arr = make([]string, 0)
-var m sync.Mutex
+const (
+	host_server = "localhost"
+	port_server = ":1313"
+	PACKET_SIZE = 512
+)
+
+var (
+	udpAddr *net.UDPAddr
+	pc *net.UDPConn
+	arr = make([]string, 0)
+	m sync.Mutex
+)
+
 func main() {
 	udpAddr , err := net.ResolveUDPAddr("udp4", port_server)
 

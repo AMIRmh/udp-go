@@ -1,9 +1,9 @@
 package client
 
 import (
+	"../../pkg/myLib"
 	"fmt"
 	"net"
-	"os"
 	"strconv"
 	"sync"
 	"encoding/binary"
@@ -27,10 +27,10 @@ func InitClient(host ,port string,thn int) {
 	service := host + ":" + port
 
 	udpAddr, err := net.ResolveUDPAddr("udp4", service)
-	checkError(err)
+	myLib.CheckError(err)
 
 	conn, err = net.DialUDP("udp", nil, udpAddr)
-	checkError(err)
+	myLib.CheckError(err)
 }
 
 
@@ -57,20 +57,13 @@ func sendThreadParts() {
 
 }
 
-func sendUDP(data []byte, part uint16) {
+func sendUDP(data []byte, part int) {
 	arr := make([]byte, PartSize)
-	binary.LittleEndian.PutUint16(arr, part)
-	arr = reverse(arr)
+	binary.LittleEndian.PutUint16(arr, uint16(part))
+	arr = myLib.Reverse(arr)
 	arr = append(arr, data...)
+	conn.Write(arr)
 
-}
-
-
-func reverse(s []byte) []byte {
-	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
-		s[i], s[j] = s[j], s[i]
-	}
-	return s
 }
 
 func getAck() {
@@ -80,17 +73,11 @@ func getAck() {
 func sendSize(size int) {
 	fmt.Println(size)
 	_, err := conn.Write([]byte(strconv.Itoa(size)))
-	checkError(err)
+	myLib.CheckError(err)
 	var buf [PacketSize]byte
 	n, err := conn.Read(buf[0:])
-	checkError(err)
+	myLib.CheckError(err)
 	fmt.Println(string(buf[0:n]))
 }
 
 
-func checkError(err error) {
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Fatal error ", err.Error())
-		os.Exit(1)
-	}
-}

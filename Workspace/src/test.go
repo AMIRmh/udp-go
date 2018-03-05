@@ -1,7 +1,7 @@
 package main
 
 import (
-	"udp-go/client"
+	"../src/client"
 )
 
 
@@ -14,4 +14,7 @@ const (
 func main() {
 	client.InitClient(Host, Port, ThreadNumbers)
 	//client.Send([]byte("asdfadsfadsfadsf"))
+	//reader := bufio.NewReader(os.Stdin)
+	//reader.ReadString('\n')
+
 }
