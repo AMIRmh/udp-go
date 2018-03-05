@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"sync"
 	"encoding/binary"
+	"time"
 )
 
 
@@ -16,10 +17,12 @@ const (
 )
 
 var (
-	 threadNumber int
-	 udpAddr *net.UDPAddr
-	 conn *net.UDPConn
-	 udpMutex sync.Mutex
+	waitAcksArray = make([]int, 0)
+	threadNumber int
+	udpAddr *net.UDPAddr
+	conn *net.UDPConn
+	ackArrayMutex sync.Mutex
+
 )
 
 func InitClient(host ,port string,thn int) {
@@ -63,11 +66,21 @@ func sendUDP(data []byte, part int) {
 	arr = myLib.Reverse(arr)
 	arr = append(arr, data...)
 	conn.Write(arr)
-
+	go getAck(data, part)
 }
 
-func getAck() {
+func getAck(data []byte, part int) {
+	ackArrayMutex.Lock()
+	waitAcksArray = append(waitAcksArray, part)
+	ackArrayMutex.Unlock()
+	time.Sleep(500 * time.Millisecond)
 
+	if index := myLib.ContainsInt(waitAcksArray, part); index != myLib.Npos {
+		ackArrayMutex.Lock()
+		waitAcksArray = myLib.RemoveInt(waitAcksArray, index)
+		ackArrayMutex.Unlock()
+		sendUDP(data, part)
+	}
 }
 
 func sendSize(size int) {

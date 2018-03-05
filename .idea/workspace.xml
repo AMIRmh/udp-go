@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="458498e7-867b-433b-a8f0-a165bcd9c67c" name="Default" comment="structure changed">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go" />
+    <list default="true" id="458498e7-867b-433b-a8f0-a165bcd9c67c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/Workspace/README.md" />
-      <change beforePath="$PROJECT_DIR$/client/client.go" afterPath="$PROJECT_DIR$/Workspace/src/client/client.go" />
-      <change beforePath="$PROJECT_DIR$/server/server" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/server/server.go" afterPath="$PROJECT_DIR$/Workspace/src/server/server.go" />
-      <change beforePath="$PROJECT_DIR$/test.go" afterPath="$PROJECT_DIR$/Workspace/src/test.go" />
+      <change beforePath="$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go" afterPath="$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go" />
+      <change beforePath="$PROJECT_DIR$/Workspace/src/client/client.go" afterPath="$PROJECT_DIR$/Workspace/src/client/client.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,13 +15,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="client.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="client.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+            <state relative-caret-position="644">
+              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
-                <element signature="e#16#97#0" expanded="true" />
+                <element signature="e#16#105#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="myLib.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding>
+                <element signature="e#15#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -41,10 +49,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Workspace/src/server/server.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
+            <state relative-caret-position="264">
               <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
               <folding>
                 <element signature="e#16#78#0" expanded="true" />
@@ -67,12 +75,16 @@
       <find>host</find>
       <find>packet_size</find>
       <find>checkError</find>
+      <find>getAckMutex</find>
+      <find>getAckArrayMutex</find>
     </findStrings>
     <replaceStrings>
       <replace>PORT</replace>
       <replace>HOST</replace>
       <replace>PACKET_SIZE</replace>
       <replace>myLib.CheckError</replace>
+      <replace>getAckArrayMutex</replace>
+      <replace>ackArrayMutex</replace>
     </replaceStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
@@ -92,9 +104,9 @@
         <option value="$PROJECT_DIR$/Workspace/src/client.go" />
         <option value="$PROJECT_DIR$/Workspace/src/server.go" />
         <option value="$PROJECT_DIR$/Workspace/src/server/server.go" />
+        <option value="$PROJECT_DIR$/Workspace/src/test.go" />
         <option value="$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go" />
         <option value="$PROJECT_DIR$/Workspace/src/client/client.go" />
-        <option value="$PROJECT_DIR$/Workspace/src/test.go" />
       </list>
     </option>
   </component>
@@ -140,6 +152,19 @@
               <item name="udp-go" type="b2602c69:ProjectViewProjectNode" />
               <item name="udp-go" type="462c0819:PsiDirectoryNode" />
               <item name="Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="pkg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="udp-go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="udp-go" type="462c0819:PsiDirectoryNode" />
+              <item name="Workspace" type="462c0819:PsiDirectoryNode" />
+              <item name="pkg" type="462c0819:PsiDirectoryNode" />
+              <item name="myLib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="udp-go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="udp-go" type="462c0819:PsiDirectoryNode" />
+              <item name="Workspace" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -173,11 +198,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Workspace/src/server" />
       <recent name="$PROJECT_DIR$/Workspace/src/client" />
       <recent name="$PROJECT_DIR$/Workspace" />
       <recent name="$PROJECT_DIR$/Workspace/src" />
-      <recent name="$PROJECT_DIR$/server" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -217,7 +242,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -246,7 +271,8 @@
     <MESSAGE value="readme update" />
     <MESSAGE value="sendUDP function started" />
     <MESSAGE value="structure changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="structure changed" />
+    <MESSAGE value="readme moved to head" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme moved to head" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -260,7 +286,7 @@
         <state relative-caret-position="1254">
           <caret line="64" column="19" lean-forward="false" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -288,7 +314,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -306,7 +332,7 @@
         <state relative-caret-position="171">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -334,7 +360,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -362,7 +388,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -390,7 +416,7 @@
         <state relative-caret-position="171">
           <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -418,7 +444,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -438,7 +464,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -458,7 +484,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -478,7 +504,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -498,7 +524,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -518,7 +544,7 @@
         <state relative-caret-position="342">
           <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="21" selection-end-column="43" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -538,7 +564,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -548,35 +574,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16#97#0" expanded="true" />
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Workspace/README.md">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          <folding>
-            <element signature="e#15#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding>
-            <element signature="e#16#97#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -590,10 +596,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Workspace/src/server/server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
+        <state relative-caret-position="264">
           <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding>
             <element signature="e#16#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <element signature="e#16#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
