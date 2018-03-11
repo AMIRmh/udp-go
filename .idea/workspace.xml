@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="458498e7-867b-433b-a8f0-a165bcd9c67c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -275,7 +274,8 @@
     <MESSAGE value="readme moved to head" />
     <MESSAGE value="sendAck and sendUDP are ready for test" />
     <MESSAGE value="client ready for test" />
-    <option name="LAST_COMMIT_MESSAGE" value="client ready for test" />
+    <MESSAGE value="gitignore updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
