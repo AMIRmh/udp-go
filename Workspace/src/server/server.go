@@ -7,23 +7,29 @@ import (
 	"io/ioutil"
 	"sync"
 	"os"
+	"encoding/binary"
+	"reflect"
 )
 
 const (
-	host_server = "localhost"
-	port_server = ":1313"
-	PACKET_SIZE = 512
+	hostServer = "localhost"
+	portServer = ":1313"
+	PacketSize = 1500
+	idSize = 10
+	partSize = 3
 )
 
 var (
+	endMessage = 4294967295
 	udpAddr *net.UDPAddr
 	pc *net.UDPConn
 	arr = make([]string, 0)
 	m sync.Mutex
+	clientFiles map[string][]byte
 )
 
 func main() {
-	udpAddr , err := net.ResolveUDPAddr("udp4", port_server)
+	udpAddr , err := net.ResolveUDPAddr("udp4", portServer)
 
 	if err != nil {
 		fmt.Println(err)
@@ -50,7 +56,7 @@ func main() {
 	fmt.Println(len(arr))
 	os.Exit(0)
 
-	buffer := make([]byte, PACKET_SIZE)
+	buffer := make([]byte, PacketSize)
 	_, addr, err := pc.ReadFromUDP(buffer[0:])
 	size, _ := strconv.Atoi(string(buffer))
 	file := make([]byte, size)
@@ -79,4 +85,39 @@ func poc(i int, wg *sync.WaitGroup) {
 	m.Lock()
 	arr = append(arr, string(buffer))
 	m.Unlock()
+}
+
+
+func readUDP() {
+	buf := make([]byte, 2000)
+
+	for {
+		pc.ReadFromUDP(buf[0:])
+		copyPc := pc
+		go processUDP(buf, copyPc)
+	}
+
+}
+
+func processUDP(buffer []byte, pc *net.UDPConn) {
+
+	id := buffer[:idSize]
+	partBuffer := buffer[idSize:idSize+partSize]
+	part := binary.BigEndian.Uint32(partBuffer)
+	data := buffer[idSize+partSize:]
+
+	if part == uint32(endMessage) {
+		ioutil.WriteFile("./a", clientFiles[string(id)], 0777)
+		delete(clientFiles, string(id))
+		pc.Write(partBuffer)
+		return
+	}
+
+
+	putInArray(id, data, int(part))
+	pc.Write(partBuffer)
+}
+
+func putInArray(id, data []byte, part int) {
+	clientFiles[string(id)][part*PacketSize:(part+1)*PacketSize] = data
 }

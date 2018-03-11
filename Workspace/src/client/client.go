@@ -13,19 +13,21 @@ import (
 
 const (
 	PacketSize = 1500
-	PartSize = 3
+	PartSize = 4
 )
 
 var (
+	endMessage = 4294967295
 	waitAcksArray = make([]int, 0)
 	numberOfThreads int
 	udpAddr *net.UDPAddr
 	conn *net.UDPConn
 	ackArrayMutex sync.Mutex
-
+	id  = make([]byte, 10)
 )
 
 func InitClient(host ,port string,nth int) {
+	id = []byte("null")
 	numberOfThreads = nth
 	service := host + ":" + port
 
@@ -34,6 +36,20 @@ func InitClient(host ,port string,nth int) {
 
 	conn, err = net.DialUDP("udp", nil, udpAddr)
 	myLib.CheckError(err)
+
+	go conn.Read(id)
+}
+
+func getId() {
+	conn.Write([]byte("id"))
+	go getIdReader()
+}
+
+func getIdReader() {
+	time.Sleep(500 * time.Millisecond)
+	if string(id) == "null" {
+		go getId()
+	}
 }
 
 
@@ -59,6 +75,11 @@ func sendChunk(input []byte) {
 
 	// waits to finish the acks
 	for range finish {}
+
+	finish = make(chan int, 1)
+	go getAck(1, finish)
+	sendUDP([]byte(""), endMessage)
+
 	fmt.Println("finished sending")
 }
 
@@ -70,8 +91,7 @@ func sendThreadParts(data []byte, threadId int, parts int) {
 
 func sendUDP(dataUdp []byte, part int) {
 	arr := make([]byte, PartSize)
-	binary.LittleEndian.PutUint16(arr, uint16(part))
-	arr = myLib.Reverse(arr)
+	binary.BigEndian.PutUint32(arr, uint32(part))
 	arr = append(arr, dataUdp...)
 	conn.Write(arr)
 	go addPartToWaitAckArray(dataUdp, part)
