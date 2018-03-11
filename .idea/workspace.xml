@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="458498e7-867b-433b-a8f0-a165bcd9c67c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Workspace/src/client/client.go" afterPath="$PROJECT_DIR$/Workspace/src/client/client.go" />
-      <change beforePath="$PROJECT_DIR$/Workspace/src/test.go" afterPath="$PROJECT_DIR$/Workspace/src/test.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+              <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -276,7 +274,8 @@
     <MESSAGE value="structure changed" />
     <MESSAGE value="readme moved to head" />
     <MESSAGE value="sendAck and sendUDP are ready for test" />
-    <option name="LAST_COMMIT_MESSAGE" value="sendAck and sendUDP are ready for test" />
+    <MESSAGE value="client ready for test" />
+    <option name="LAST_COMMIT_MESSAGE" value="client ready for test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -779,7 +778,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding />
         </state>
       </provider>
