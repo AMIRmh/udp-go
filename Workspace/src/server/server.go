@@ -1,4 +1,4 @@
-package server
+package main
 
 import (
 	"fmt"
@@ -6,29 +6,34 @@ import (
 	"strconv"
 	"io/ioutil"
 	"sync"
-	"os"
 	"encoding/binary"
-	"reflect"
+	"udp-go/Workspace/pkg/myLib"
 )
 
 const (
 	hostServer = "localhost"
+	DefaultId = "1234567890"
 	portServer = ":1313"
-	PacketSize = 1500
+	DataSize = 1500
 	idSize = 10
-	partSize = 3
+	partSize = 4
 )
 
 var (
-	endMessage = 4294967295
+	specialMessage = 4294967295
 	udpAddr *net.UDPAddr
 	pc *net.UDPConn
 	arr = make([]string, 0)
-	m sync.Mutex
-	clientFiles map[string][]byte
+	clientMutex = make(map[string]sync.Mutex)
+	clientFiles =  make(map[string][]byte)
 )
 
 func main() {
+	initServer()
+	readUDP()
+}
+
+func initServer() {
 	udpAddr , err := net.ResolveUDPAddr("udp4", portServer)
 
 	if err != nil {
@@ -41,83 +46,65 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-
-
-	defer pc.Close()
-
-	var wg sync.WaitGroup
-
-	wg.Add(500)
-	for i := 0; i < 500; i++ {
-		go poc(i, &wg)
-	}
-	wg.Wait()
-	fmt.Println(arr)
-	fmt.Println(len(arr))
-	os.Exit(0)
-
-	buffer := make([]byte, PacketSize)
-	_, addr, err := pc.ReadFromUDP(buffer[0:])
-	size, _ := strconv.Atoi(string(buffer))
-	file := make([]byte, size)
-
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	fmt.Println("size: " + string(buffer))
-	//size,_ := strconv.Atoi(string(buffer))
-	//arr := make([]byte, size)
-
-
-	pc.WriteToUDP([]byte("salam from client"), addr)
-	pc.ReadFromUDP(file)
-	ioutil.WriteFile("./a", file, 0777)
 }
-
-
-func poc(i int, wg *sync.WaitGroup) {
-	defer wg.Done()
-	buffer := make([]byte, 1024)
-	pc.Read(buffer)
-	fmt.Println("got " + strconv.Itoa(i) + " " + string(buffer))
-	m.Lock()
-	arr = append(arr, string(buffer))
-	m.Unlock()
-}
-
 
 func readUDP() {
-	buf := make([]byte, 2000)
-
+	buf := make([]byte, DataSize+partSize+idSize)
+	fmt.Println(byte(0))
 	for {
-		pc.ReadFromUDP(buf[0:])
-		copyPc := pc
-		go processUDP(buf, copyPc)
+		_, remoteAddr, _ := pc.ReadFromUDP(buf[0:])
+		go processUDP(buf, remoteAddr)
+		buf = make([]byte, DataSize+partSize+idSize)
 	}
-
 }
 
-func processUDP(buffer []byte, pc *net.UDPConn) {
-
-	id := buffer[:idSize]
+func processUDP(buffer []byte, remoteAddr *net.UDPAddr) {
+	id := buffer[0:idSize]
 	partBuffer := buffer[idSize:idSize+partSize]
 	part := binary.BigEndian.Uint32(partBuffer)
 	data := buffer[idSize+partSize:]
 
-	if part == uint32(endMessage) {
-		ioutil.WriteFile("./a", clientFiles[string(id)], 0777)
-		delete(clientFiles, string(id))
-		pc.Write(partBuffer)
+	if part == uint32(specialMessage) {
+		if string(data) == "end" {
+			ioutil.WriteFile("./a", clientFiles[string(id)], 0777)
+			delete(clientFiles, string(id))
+			pc.WriteToUDP(partBuffer, remoteAddr)
+		} else if string(id) == DefaultId {
+			newId := myLib.RandStringRunes(idSize)
+			var mx sync.Mutex
+			clientMutex[string(newId)] = mx
+			pc.WriteToUDP([]byte(newId), remoteAddr)
+		} else if n, err := strconv.Atoi(trimNullString(data)); err == nil {
+
+			clientFiles[string(id)] = make([]byte, n)
+			pc.WriteToUDP(partBuffer, remoteAddr)
+		}
+
 		return
 	}
-
 
 	putInArray(id, data, int(part))
 	pc.Write(partBuffer)
 }
 
 func putInArray(id, data []byte, part int) {
-	clientFiles[string(id)][part*PacketSize:(part+1)*PacketSize] = data
+	mx := clientMutex[string(id)]
+	mx.Lock()
+	fmt.Println("this is :" , len(clientFiles[string(id)]))
+	clientPart := clientFiles[string(id)]
+	clientPart = append(clientPart[0:part*DataSize],
+					append(data, clientPart[(part+1)*DataSize:]...)...)
+	clientFiles[string(id)] = clientPart
+	mx.Unlock()
+}
+
+func trimNullString(str []byte) string {
+	var index int
+	for i, s := range str {
+		if s == byte(0) {
+			index = i
+			break
+		}
+	}
+	return string(str[0:index])
 }

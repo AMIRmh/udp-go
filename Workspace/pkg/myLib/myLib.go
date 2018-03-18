@@ -3,10 +3,16 @@ package myLib
 import (
 	"fmt"
 	"os"
+	"time"
+	"math/rand"
 )
 
 const (
 	Npos = -1
+)
+
+var (
+	letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 )
 
 func CheckError(err error) {
@@ -40,4 +46,13 @@ func ContainsInt(arr []int, elem int) int {
 // remove an element by index from an int array
 func RemoveInt(arr []int, index int) []int {
 	return append(arr[:index], arr[index+1:]...)
+}
+
+func RandStringRunes(n int) string {
+	rand.Seed(time.Now().UnixNano())
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
 }
