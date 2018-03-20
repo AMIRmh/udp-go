@@ -1,7 +1,6 @@
 package client
 
 import (
-
 	"fmt"
 	"net"
 	"strconv"
@@ -10,7 +9,6 @@ import (
 	"time"
 	"udp-go/Workspace/pkg/myLib"
 )
-
 
 const (
 	DataSize = 1500
@@ -32,16 +30,7 @@ func InitClient(host ,port string,nth int) {
 	id = []byte(DefaultId)
 	numberOfThreads = nth
 	service := host + ":" + port
-
 	udpAddr, _ = net.ResolveUDPAddr("udp4", service)
-
-	//conns = make([]*net.UDPConn, nth)
-	//for i := 0; i < nth; i++ {
-	//	newConn, err := net.DialUDP("udp", nil, udpAddr)
-	//	myLib.CheckError(err)
-	//	conns = append(conns, newConn)
-	//}
-
 	getId()
 }
 
@@ -67,14 +56,23 @@ func fillId() {
 	}
 }
 
-
 func Send(data []byte) {
+	fmt.Println("sending size")
 	sendSize(len(data))
-	sendChunk(data)
+	fmt.Println("sending intro")
+	conn := introduceAckConnection()
+	fmt.Println("sending chuncks")
+	sendChunk(data, conn)
+}
+
+func introduceAckConnection() *net.UDPConn {
+	conn := createConnection()
+	syncSendUDP([]byte("introduceAck"), specialMessage, conn)
+	return conn
 }
 
 
-func sendChunk(input []byte) {
+func sendChunk(input []byte, conn *net.UDPConn) {
 	var appendArray []byte
 	if len(input) > DataSize {
 		appendArray = make([]byte, len(input)%DataSize)
@@ -83,26 +81,10 @@ func sendChunk(input []byte) {
 	}
 	input = append(input, appendArray...)
 	parts := len(input) / DataSize
-	fmt.Println("parts: ", len(input))
 
-	var wg sync.WaitGroup
-	wg.Add(numberOfThreads)
+
 	for i := 0; i < numberOfThreads; i++ {
-		go sendThreadParts(input, i, parts, &wg)
-	}
-	wg.Wait()
-
-	// end message to close the connection.
-	syncSendUDP([]byte("end"), specialMessage, createConnection())
-	fmt.Println("finished sending")
-}
-
-func sendThreadParts(data []byte, threadId int, parts int, wg *sync.WaitGroup) {
-	defer wg.Done()
-	conn := createConnection()
-	for i := threadId; i < parts; i+=numberOfThreads {
-		//go addPartToWaitAckArray(data[i*DataSize: (i+1)*DataSize], i, conns[threadId])
-		syncSendUDP(data[i*DataSize: (i+1)*DataSize], i, conn)
+		go sendThreadParts(input, i, parts)
 	}
 
 	// get acks runs in a parallel loop with the program.
@@ -111,7 +93,24 @@ func sendThreadParts(data []byte, threadId int, parts int, wg *sync.WaitGroup) {
 
 	// waits to finish the acks
 	for range finish {}
-	fmt.Println("thread " , threadId , " finished")
+
+	// end message to close the connection.
+	fmt.Println("sending end to server")
+	syncSendUDP([]byte("end"), specialMessage, createConnection())
+	fmt.Println("finished sending")
+}
+
+func sendThreadParts(data []byte, threadId int, parts int) {
+	conn := createConnection()
+	if threadId >= parts {
+		fmt.Println("thread ", threadId, " finished")
+		return
+	}
+	for i := threadId; i < parts; i+=numberOfThreads {
+		asyncSendUDP(data[i*DataSize: (i+1)*DataSize], i, conn)
+	}
+
+	fmt.Println("thread ", threadId, " finished")
 }
 
 func asyncSendUDP(dataUdp []byte, part int, udpConn *net.UDPConn) {
@@ -121,10 +120,6 @@ func asyncSendUDP(dataUdp []byte, part int, udpConn *net.UDPConn) {
 	data := id
 	data = append(data, arr...)
 	_, err := udpConn.Write(data)
-	if part == specialMessage {
-		fmt.Println(string(data))
-		fmt.Println(data)
-	}
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -153,29 +148,31 @@ func addPartToWaitAckArray(data []byte, part int, udpConn *net.UDPConn) {
 }
 
 func sendSize(size int) {
-	fmt.Println("size: " + strconv.Itoa(size))
 	syncSendUDP([]byte(strconv.Itoa(size)), specialMessage, createConnection())
-	fmt.Println("send size finished")
 }
 
 func getAck(parts int, finish chan int, udpConn *net.UDPConn) {
 	buf := make([]byte, 10)
 	var mx sync.Mutex
+	ii := 0
 	for i := 0; i < parts ; {
 		udpConn.Read(buf[0:])
-		go func() {
+		fmt.Println("i: ", i, "parts: ", parts, "ii: ", ii)
+		ii++
+		go func(i *int) {
 			part := binary.BigEndian.Uint32(buf)
+			//fmt.Println("hey", part)
 			//myLib.CheckError(err)s
 			// TODO I should find another way. mutex is not a good 	solution
 			if removeElementFromAckArray(int(part)) {
 				mx.Lock()
-				i++
+				*i = *i + 1
 				mx.Unlock()
-				if i >= parts {
+				if *i >= parts {
 					udpConn.Close()
 				}
 			}
-		}()
+		}(&i)
 	}
 	close(finish)
 }
