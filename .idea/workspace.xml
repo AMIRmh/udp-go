@@ -4,7 +4,6 @@
     <list default="true" id="458498e7-867b-433b-a8f0-a165bcd9c67c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Workspace/src/client/client.go" afterPath="$PROJECT_DIR$/Workspace/src/client/client.go" />
-      <change beforePath="$PROJECT_DIR$/Workspace/src/server/server.go" afterPath="$PROJECT_DIR$/Workspace/src/server/server.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,14 +17,19 @@
       <file leaf-file-name="client.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="136" column="5" lean-forward="false" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+            <state relative-caret-position="-84">
+              <caret line="119" column="28" lean-forward="false" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
               <folding>
-                <element signature="e#118#184#0" expanded="false" />
-                <element signature="e#186#369#0" expanded="false" />
+                <element signature="e#118#222#0" expanded="false" />
+                <element signature="e#224#407#0" expanded="false" />
                 <element signature="n#!!block;n#InitClient#0" expanded="false" />
                 <element signature="n#!!block;n#getId#0" expanded="false" />
                 <element signature="n#!!block;n#fillId#0" expanded="false" />
+                <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+                <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+                <element signature="n#!!block;n#sendSize#0" expanded="false" />
+                <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+                <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -34,7 +38,7 @@
       <file leaf-file-name="server.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Workspace/src/server/server.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
+            <state relative-caret-position="456">
               <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding>
                 <element signature="e#121#248#0" expanded="false" />
@@ -52,7 +56,7 @@
       <file leaf-file-name="test.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Workspace/src/test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
+            <state relative-caret-position="360">
               <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="e#14#104#0" expanded="true" />
@@ -86,7 +90,6 @@
       <find>endMessage</find>
       <find>m</find>
       <find>null</find>
-      <find>syncSendUDP</find>
       <find>getId</find>
       <find>fmt.print</find>
       <find>conn</find>
@@ -94,6 +97,8 @@
       <find>partSize</find>
       <find>portServer</find>
       <find>sync</find>
+      <find>addPartToWaitAckArray</find>
+      <find>syncSendUDP</find>
     </findStrings>
     <replaceStrings>
       <replace>PORT</replace>
@@ -112,6 +117,7 @@
       <replace>DataSize</replace>
       <replace>PartSize</replace>
       <replace>PortServer</replace>
+      <replace>retrySendUDP</replace>
     </replaceStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
@@ -164,6 +170,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -214,7 +221,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -265,15 +271,16 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-71" y="0" width="1600" height="855" extended-state="6" />
+    <frame x="-71" y="0" width="1920" height="1035" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.134375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2997312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24100327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -284,7 +291,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -305,7 +311,8 @@
     <MESSAGE value="gitignore updated" />
     <MESSAGE value="client has improved with id.&#10;server is almost done" />
     <MESSAGE value="bug in null byte at the end of string fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug in null byte at the end of string fixed" />
+    <MESSAGE value="getAck moved to sendChunck function" />
+    <option name="LAST_COMMIT_MESSAGE" value="getAck moved to sendChunck function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -314,26 +321,21 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Workspace/src/test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-          <folding>
-            <element signature="e#14#104#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -353,11 +355,16 @@
         <state relative-caret-position="1496">
           <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -400,11 +407,16 @@
         <state relative-caret-position="1254">
           <caret line="64" column="19" lean-forward="false" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -440,11 +452,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -464,11 +481,16 @@
         <state relative-caret-position="171">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -504,11 +526,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -544,11 +571,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -584,11 +616,16 @@
         <state relative-caret-position="171">
           <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -624,11 +661,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -654,11 +696,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -684,11 +731,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -714,11 +766,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -744,11 +801,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -774,11 +836,16 @@
         <state relative-caret-position="342">
           <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="21" selection-end-column="43" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -804,11 +871,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -818,11 +890,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -894,13 +971,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Workspace/src/test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
+        <state relative-caret-position="360">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="e#14#104#0" expanded="true" />
@@ -910,7 +986,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Workspace/src/server/server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
+        <state relative-caret-position="456">
           <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding>
             <element signature="e#121#248#0" expanded="false" />
@@ -924,16 +1000,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Workspace/src/server/a">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="136" column="5" lean-forward="false" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+        <state relative-caret-position="-84">
+          <caret line="119" column="28" lean-forward="false" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
           <folding>
-            <element signature="e#118#184#0" expanded="false" />
-            <element signature="e#186#369#0" expanded="false" />
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
             <element signature="n#!!block;n#fillId#0" expanded="false" />
+            <element signature="n#!!block;n#syncSendUDP#0" expanded="false" />
+            <element signature="n#!!block;n#retrySendUDPCommon#0" expanded="false" />
+            <element signature="n#!!block;n#sendSize#0" expanded="false" />
+            <element signature="n#!!block;n#getAckSpecial#0" expanded="false" />
+            <element signature="n#!!block;n#getAckCommon#0" expanded="false" />
           </folding>
         </state>
       </provider>

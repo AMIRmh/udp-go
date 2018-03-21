@@ -14,6 +14,7 @@ const (
 	DataSize = 1500
 	PartSize = 4
 	DefaultId = "1234567890"
+	ReadTimeOut = 500 * time.Millisecond
 )
 
 var (
@@ -89,7 +90,7 @@ func sendChunk(input []byte, conn *net.UDPConn) {
 
 	// get acks runs in a parallel loop with the program.
 	finish := make(chan int, 1)
-	go getAck(parts, finish, conn)
+	go getAckCommon(parts, finish, conn)
 
 	// waits to finish the acks
 	for range finish {}
@@ -108,6 +109,7 @@ func sendThreadParts(data []byte, threadId int, parts int) {
 	}
 	for i := threadId; i < parts; i+=numberOfThreads {
 		asyncSendUDP(data[i*DataSize: (i+1)*DataSize], i, conn)
+		go retrySendUDPCommon(data[i*DataSize: (i+1)*DataSize], i, conn)
 	}
 
 	fmt.Println("thread ", threadId, " finished")
@@ -126,15 +128,18 @@ func asyncSendUDP(dataUdp []byte, part int, udpConn *net.UDPConn) {
 }
 
 func syncSendUDP(data []byte, part int, udpConn *net.UDPConn) {
-	go addPartToWaitAckArray(data, part, udpConn)
+	ackArrayMutex.Lock()
+	waitAcksArray = append(waitAcksArray, part)
+	ackArrayMutex.Unlock()
+
 	asyncSendUDP(data, part, udpConn)
 
 	finish := make(chan int, 1)
-	go getAck(1, finish, udpConn)
+	go getAckSpecial(data, part, 1, finish, udpConn)
 	for range finish {}
 }
 
-func addPartToWaitAckArray(data []byte, part int, udpConn *net.UDPConn) {
+func retrySendUDPCommon(data []byte, part int, udpConn *net.UDPConn) {
 	ackArrayMutex.Lock()
 	waitAcksArray = append(waitAcksArray, part)
 	ackArrayMutex.Unlock()
@@ -143,7 +148,7 @@ func addPartToWaitAckArray(data []byte, part int, udpConn *net.UDPConn) {
 	// maybe I should put lock here!!!!
 	if removeElementFromAckArray(part) {
 		asyncSendUDP(data, part, udpConn)
-		go addPartToWaitAckArray(data, part, udpConn)
+		go retrySendUDPCommon(data, part, udpConn)
 	}
 }
 
@@ -151,7 +156,37 @@ func sendSize(size int) {
 	syncSendUDP([]byte(strconv.Itoa(size)), specialMessage, createConnection())
 }
 
-func getAck(parts int, finish chan int, udpConn *net.UDPConn) {
+func getAckSpecial(data []byte, part int,  parts int, finish chan int, udpConn *net.UDPConn) {
+	buf := make([]byte, 10)
+	var mx sync.Mutex
+	ii := 0
+	for i := 0; i < parts ; {
+		udpConn.SetReadDeadline(time.Now().Add(ReadTimeOut))
+		_, err := udpConn.Read(buf[0:])
+		if err != nil {
+			asyncSendUDP(data, part, udpConn)
+		} else {
+			part := binary.BigEndian.Uint32(buf)
+			//fmt.Println("hey", part)
+			//myLib.CheckError(err)s
+			// TODO I should find another way. mutex is not a good 	solution
+			if removeElementFromAckArray(int(part)) {
+				mx.Lock()
+				i = i + 1
+				mx.Unlock()
+				if i >= parts {
+					udpConn.Close()
+				}
+			}
+		}
+		fmt.Println("i: ", i, "parts: ", parts, "ii: ", ii)
+		ii++
+	}
+	close(finish)
+}
+
+
+func getAckCommon(parts int, finish chan int, udpConn *net.UDPConn) {
 	buf := make([]byte, 10)
 	var mx sync.Mutex
 	ii := 0
