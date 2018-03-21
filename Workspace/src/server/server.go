@@ -27,6 +27,7 @@ var (
 	clientMutex = make(map[string]sync.Mutex)
 	clientFiles =  make(map[string][]byte)
 	clientAckAddrs = make(map[string]*net.UDPAddr)
+	clienSizes = make(map[string]int)
 )
 
 func main() {
@@ -67,14 +68,21 @@ func processUDP(buffer []byte, remoteAddr *net.UDPAddr) {
 	if part == specialMessage {
 		specialMessageHandler(data, id, partBuffer, remoteAddr)
 	} else {
+		defer func() {
+			if r := recover(); r == nil {
+				fmt.Println("sending part")
+				pc.WriteToUDP(partBuffer, clientAckAddrs[string(id)])
+			} else {
+				fmt.Println("panic happend but recovered!!!!")
+			}
+		}()
+		fmt.Println("part came: ", part)
 		putInArray(id, data, part)
-		pc.WriteToUDP(partBuffer, clientAckAddrs[string(id)])
 	}
 }
 
 func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr) {
 
-	fmt.Println(string(data))
 	if trimNullString(data) == "introduceAck" {
 
 		clientAckAddrs[string(id)] = remoteAddr
@@ -82,9 +90,11 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 
 	} else if trimNullString(data) == "end" {
 
-		fmt.Println("end recieved")
-		ioutil.WriteFile("./a", clientFiles[string(id)], 0777)
+		fmt.Println(string(id), " end recieved")
+		ioutil.WriteFile("./a", clientFiles[string(id)][0:clienSizes[string(id)]], 0777)
 		delete(clientFiles, string(id))
+		delete(clienSizes, string(id))
+		delete(clientAckAddrs, string(id))
 		pc.WriteToUDP(partBuffer, remoteAddr)
 
 	} else if string(id) == DefaultId {
@@ -96,19 +106,20 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 
 	} else if size, err := strconv.Atoi(trimNullString(data)); err == nil {
 
+		clienSizes[string(id)] = size
+
+
 		if size < DataSize {
 			clientFiles[string(id)] = make([]byte, DataSize)
 		} else {
-			clientFiles[string(id)] = make([]byte, size + size%DataSize)
+			clientFiles[string(id)] = make([]byte, size + (DataSize-size%DataSize))
+			fmt.Println(len(clientFiles[string(id)]))
 		}
 		pc.WriteToUDP(partBuffer, remoteAddr)
-
 	}
 }
 
 func putInArray(id, data []byte, part int) {
-	fmt.Println(part)
-
 	mx := clientMutex[string(id)]
 	clientPart := clientFiles[string(id)]
 	clientPart = append(clientPart[0:part*DataSize],
@@ -117,8 +128,6 @@ func putInArray(id, data []byte, part int) {
 	mx.Lock()
 	clientFiles[string(id)] = clientPart
 	mx.Unlock()
-
-	fmt.Println(clientFiles[string(id)])
 
 }
 
