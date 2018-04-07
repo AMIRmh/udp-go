@@ -25,8 +25,8 @@ var (
 	pc *net.UDPConn
 	arr = make([]string, 0)
 	clientMutex = make(map[string]*sync.Mutex)
-	clientFiles =  make(map[string][]byte)
-	clienSizes = make(map[string]int)
+	clientFiles =  make(map[string][][]byte)
+	clientSizes = make(map[string]int)
 )
 
 func main() {
@@ -86,10 +86,13 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 	if trimNullString(data) == "end" {
 
 		fmt.Println(string(id), " end recieved")
-		ioutil.WriteFile("./a", clientFiles[string(id)][0:clienSizes[string(id)]], 0777)
+		writeToFileArray := make([]byte, 0)
+		for _,d := range clientFiles[string(id)] {
+			writeToFileArray = append(writeToFileArray, d...)
+		}
+		ioutil.WriteFile("./a", writeToFileArray[0:clientSizes[string(id)]], 0777)
 		delete(clientFiles, string(id))
-		delete(clienSizes, string(id))
-		//delete(clientAckAddrs, string(id))
+		delete(clientSizes, string(id))
 		pc.WriteToUDP(partBuffer, remoteAddr)
 
 	} else if string(id) == DefaultId {
@@ -101,13 +104,18 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 
 	} else if size, err := strconv.Atoi(trimNullString(data)); err == nil {
 
-		clienSizes[string(id)] = size
+		clientSizes[string(id)] = size
 
 
 		if size < DataSize {
-			clientFiles[string(id)] = make([]byte, DataSize)
+			clientFiles[string(id)] = make([][]byte, 1)
+			clientFiles[string(id)][0] = make([]byte, DataSize)
 		} else {
-			clientFiles[string(id)] = make([]byte, size + (DataSize-size%DataSize))
+			s := (size + (DataSize-size%DataSize)) / DataSize
+			clientFiles[string(id)] = make([][]byte, s)
+			for i := 0; i < s; i++ {
+				clientFiles[string(id)][i] = make([]byte, DataSize)
+			}
 			fmt.Println(len(clientFiles[string(id)]))
 		}
 		pc.WriteToUDP(partBuffer, remoteAddr)
@@ -115,18 +123,19 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 }
 
 func putInArray(id, data []byte, part int) {
-	mx := clientMutex[string(id)]
-	mx.Lock()
-	clientPart := clientFiles[string(id)]
+	//mx := clientMutex[string(id)]
+	//mx.Lock()
+	//clientPart := clientFiles[string(id)]
+	////mx.Unlock()
+	//
+	//clientPart = append(clientPart[0:part*DataSize],
+	//				append(data, clientPart[(part+1)*DataSize:]...)...)
+	//
+	////mx.Lock()
+	//clientFiles[string(id)] = clientPart
 	//mx.Unlock()
 
-	clientPart = append(clientPart[0:part*DataSize],
-					append(data, clientPart[(part+1)*DataSize:]...)...)
-
-	//mx.Lock()
-	clientFiles[string(id)] = clientPart
-	mx.Unlock()
-
+	clientFiles[string(id)][part] = data
 }
 
 func trimNullString(str []byte) string {
