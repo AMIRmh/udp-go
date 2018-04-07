@@ -18,24 +18,15 @@
       <file leaf-file-name="client.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="86" column="44" lean-forward="false" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="44" />
+            <state relative-caret-position="288">
+              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
                 <element signature="e#118#222#0" expanded="false" />
                 <element signature="e#224#407#0" expanded="false" />
                 <element signature="n#!!block;n#InitClient#0" expanded="false" />
                 <element signature="n#!!block;n#getId#0" expanded="false" />
+                <element signature="n#!!block;n#fillId#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="a" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Workspace/src/server/a">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1811">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -43,8 +34,8 @@
       <file leaf-file-name="server.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Workspace/src/server/server.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="114" column="80" lean-forward="true" selection-start-line="114" selection-start-column="80" selection-end-line="114" selection-end-column="80" />
+            <state relative-caret-position="1992">
+              <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
               <folding>
                 <element signature="e#121#248#0" expanded="false" />
                 <element signature="n#!!block;n#main#1" expanded="false" />
@@ -59,8 +50,8 @@
       <file leaf-file-name="test.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Workspace/src/test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="18" column="63" lean-forward="false" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
+            <state relative-caret-position="389">
+              <caret line="21" column="65" lean-forward="false" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
               <folding>
                 <element signature="e#14#76#0" expanded="true" />
               </folding>
@@ -105,6 +96,7 @@
       <find>getAckCommon</find>
       <find>err</find>
       <find>retry</find>
+      <find>myLib.Che</find>
     </findStrings>
     <replaceStrings>
       <replace>PORT</replace>
@@ -177,7 +169,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,6 +218,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,11 +275,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24100327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24100327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39919356" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -296,6 +287,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -318,7 +310,8 @@
     <MESSAGE value="bug in null byte at the end of string fixed" />
     <MESSAGE value="getAck moved to sendChunck function" />
     <MESSAGE value="client successfully has sent a message" />
-    <option name="LAST_COMMIT_MESSAGE" value="client successfully has sent a message" />
+    <MESSAGE value="bug in connections fixed.&#10;still files bigger than 1.5KB has problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug in connections fixed.&#10;still files bigger than 1.5KB has problem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -336,6 +329,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -359,6 +353,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -403,6 +398,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -440,6 +436,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -463,6 +460,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -500,6 +498,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -537,6 +536,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -574,6 +574,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -611,6 +612,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -638,6 +640,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -665,6 +668,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -692,6 +696,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -719,6 +724,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -746,6 +752,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -773,6 +780,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -786,6 +794,7 @@
             <element signature="e#224#407#0" expanded="false" />
             <element signature="n#!!block;n#InitClient#0" expanded="false" />
             <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -839,13 +848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/go/src/net/udpsock.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -860,10 +862,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Workspace/src/server/a">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="e#118#222#0" expanded="false" />
+            <element signature="e#224#407#0" expanded="false" />
+            <element signature="n#!!block;n#InitClient#0" expanded="false" />
+            <element signature="n#!!block;n#getId#0" expanded="false" />
+            <element signature="n#!!block;n#fillId#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Workspace/src/server/server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="114" column="80" lean-forward="true" selection-start-line="114" selection-start-column="80" selection-end-line="114" selection-end-column="80" />
+        <state relative-caret-position="1992">
+          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding>
             <element signature="e#121#248#0" expanded="false" />
             <element signature="n#!!block;n#main#1" expanded="false" />
@@ -874,31 +904,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Workspace/src/client/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="86" column="44" lean-forward="false" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="44" />
-          <folding>
-            <element signature="e#118#222#0" expanded="false" />
-            <element signature="e#224#407#0" expanded="false" />
-            <element signature="n#!!block;n#InitClient#0" expanded="false" />
-            <element signature="n#!!block;n#getId#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Workspace/src/server/a">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1811">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Workspace/src/test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="18" column="63" lean-forward="false" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
+        <state relative-caret-position="389">
+          <caret line="21" column="65" lean-forward="false" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
           <folding>
             <element signature="e#14#76#0" expanded="true" />
           </folding>

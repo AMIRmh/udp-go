@@ -24,9 +24,8 @@ var (
 	udpAddr *net.UDPAddr
 	pc *net.UDPConn
 	arr = make([]string, 0)
-	clientMutex = make(map[string]sync.Mutex)
+	clientMutex = make(map[string]*sync.Mutex)
 	clientFiles =  make(map[string][]byte)
-	clientAckAddrs = make(map[string]*net.UDPAddr)
 	clienSizes = make(map[string]int)
 )
 
@@ -71,37 +70,33 @@ func processUDP(buffer []byte, remoteAddr *net.UDPAddr) {
 		defer func() {
 			if r := recover(); r == nil {
 				fmt.Println("sending part")
-				pc.WriteToUDP(partBuffer, clientAckAddrs[string(id)])
+				//pc.WriteToUDP(partBuffer, clientAckAddrs[string(id)])
+				pc.WriteToUDP(partBuffer, remoteAddr)
 			} else {
 				fmt.Println("panic happend but recovered!!!!")
 			}
 		}()
 		fmt.Println("part came: ", part)
-		putInArray(id, data, part)
+		go putInArray(id, data, part)
 	}
 }
 
 func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr) {
 
-	if trimNullString(data) == "introduceAck" {
-
-		clientAckAddrs[string(id)] = remoteAddr
-		pc.WriteToUDP(partBuffer, remoteAddr)
-
-	} else if trimNullString(data) == "end" {
+	if trimNullString(data) == "end" {
 
 		fmt.Println(string(id), " end recieved")
 		ioutil.WriteFile("./a", clientFiles[string(id)][0:clienSizes[string(id)]], 0777)
 		delete(clientFiles, string(id))
 		delete(clienSizes, string(id))
-		delete(clientAckAddrs, string(id))
+		//delete(clientAckAddrs, string(id))
 		pc.WriteToUDP(partBuffer, remoteAddr)
 
 	} else if string(id) == DefaultId {
 
 		newId := myLib.RandStringRunes(IdSize)
 		var mx sync.Mutex
-		clientMutex[string(newId)] = mx
+		clientMutex[string(newId)] = &mx
 		pc.WriteToUDP([]byte(newId), remoteAddr)
 
 	} else if size, err := strconv.Atoi(trimNullString(data)); err == nil {
@@ -121,11 +116,14 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 
 func putInArray(id, data []byte, part int) {
 	mx := clientMutex[string(id)]
+	mx.Lock()
 	clientPart := clientFiles[string(id)]
+	//mx.Unlock()
+
 	clientPart = append(clientPart[0:part*DataSize],
 					append(data, clientPart[(part+1)*DataSize:]...)...)
 
-	mx.Lock()
+	//mx.Lock()
 	clientFiles[string(id)] = clientPart
 	mx.Unlock()
 
