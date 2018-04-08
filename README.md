@@ -47,4 +47,3 @@ I suppose to have these features in future:
 * packet loss and latency simulation
 * block by block waiting for reliability
 * large file fragmentation
-*
