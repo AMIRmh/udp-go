@@ -30,3 +30,21 @@ func main() {
 }
 
 ```
+
+## Current features
+
+* reliable UDP connection
+* low latency thanks to Go multithreading solutions
+* cross platform
+
+## TODO features
+
+I suppose to have these features in future:
+
+* peer to peer connection
+* [hole punching](https://en.wikipedia.org/wiki/Hole_punching_(networking))
+* encryption
+* packet loss and latency simulation
+* block by block waiting for reliability
+* large file fragmentation
+*
