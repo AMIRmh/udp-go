@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="458498e7-867b-433b-a8f0-a165bcd9c67c" name="Default" comment="readme update">
+    <list default="true" id="458498e7-867b-433b-a8f0-a165bcd9c67c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go" afterPath="$PROJECT_DIR$/Workspace/pkg/myLib/myLib.go" />
-      <change beforePath="$PROJECT_DIR$/Workspace/src/client/client.go" afterPath="$PROJECT_DIR$/Workspace/src/client/client.go" />
-      <change beforePath="$PROJECT_DIR$/Workspace/src/server/server.go" afterPath="$PROJECT_DIR$/Workspace/src/server/server.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -348,7 +345,8 @@
     <MESSAGE value="server map 1D array changed to 2D array" />
     <MESSAGE value="first stable POC." />
     <MESSAGE value="readme update" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme update" />
+    <MESSAGE value="static windows size replaced previous version" />
+    <option name="LAST_COMMIT_MESSAGE" value="static windows size replaced previous version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
