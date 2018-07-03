@@ -20,16 +20,21 @@ const (
 var (
 	specialMessage = 4294967295
 	waitAcksArray = make([]int, 0)
-	numberOfThreads int
+	windowsSize int
 	udpAddr *net.UDPAddr
 	conns []*net.UDPConn
 	ackArrayMutex sync.Mutex
 	id  = make([]byte, 10)
 )
 
+type Packet struct {
+	partNumber int
+	data []byte
+}
+
 func InitClient(host ,port string,nth int) {
 	id = []byte(DefaultId)
-	numberOfThreads = nth
+	windowsSize = nth
 	service := host + ":" + port
 	udpAddr, _ = net.ResolveUDPAddr("udp4", service)
 	getId()
@@ -60,11 +65,12 @@ func fillId() {
 func Send(data []byte) {
 	fmt.Println("sending size")
 	sendSize(len(data))
-	fmt.Println("sending chuncks")
+	fmt.Println("s=ending chuncks")
 	sendChunk(data)
 }
 
 func sendChunk(input []byte) {
+	// padding
 	var appendArray []byte
 	if len(input) > DataSize {
 		appendArray = make([]byte, DataSize-len(input)%DataSize)
@@ -75,11 +81,16 @@ func sendChunk(input []byte) {
 	input = append(input, appendArray...)
 	parts := len(input) / DataSize
 	fmt.Println(len(input) % DataSize)
-
+	
+	// queue created
+	packetsChannel := make(chan Packet, parts)
+	go partsQueue(input, packetsChannel, parts)
+	
+	// sending parts in windows size
 	var wg sync.WaitGroup
-	wg.Add(numberOfThreads)
-	for i := 0; i < numberOfThreads; i++ {
-		go sendThreadParts(input, i, parts, &wg)
+	wg.Add(windowsSize)
+	for i := 0; i < windowsSize; i++ {
+		go sendThreadParts(packetsChannel, &wg)
 	}
 	wg.Wait()
 
@@ -89,20 +100,20 @@ func sendChunk(input []byte) {
 	fmt.Println("finished sending")
 }
 
-func sendThreadParts(data []byte, threadId int, parts int, wgThread *sync.WaitGroup) {
+func partsQueue(input []byte, ch chan Packet, parts int) {
+	for i := 0; i < parts; i++ {
+		ch <- Packet{i, input[i * DataSize: (i + 1) * DataSize]}
+	}
+	close(ch)
+}
+
+func sendThreadParts(ch chan Packet, wgThread *sync.WaitGroup) {
 	defer wgThread.Done()
-	if threadId >= parts {
-		return
+	conn := createConnection()
+	for packet := range ch {
+		syncSendUDP(packet.data, packet.partNumber, conn)
 	}
-	var wg sync.WaitGroup
-	for i := threadId; i < parts; i+=numberOfThreads {
-		conn := createConnection()
-		asyncSendUDP(data[i*DataSize: (i+1)*DataSize], i, conn)
-		wg.Add(1)
-		go retrySendUDPCommon(data[i*DataSize: (i+1)*DataSize], i, conn, &wg)
-	}
-	wg.Wait()
-	fmt.Println("thread ", threadId, " finished")
+	fmt.Println("send part finished")
 }
 
 func asyncSendUDP(dataUdp []byte, part int, udpConn *net.UDPConn) {
@@ -122,18 +133,18 @@ func syncSendUDP(data []byte, part int, udpConn *net.UDPConn) {
 	asyncSendUDP(data, part, udpConn)
 	var wg sync.WaitGroup
 	wg.Add(1)
-	retrySendUDPCommon(data, part, udpConn, &wg)
+	retrySendUDP(data, part, udpConn, &wg)
 	wg.Wait()
 }
 
-func retrySendUDPCommon(data []byte, part int, udpConn *net.UDPConn, wg *sync.WaitGroup) {
+func retrySendUDP(data []byte, part int, udpConn *net.UDPConn, wg *sync.WaitGroup) {
 	buf := make([]byte, 10)
 	udpConn.SetReadDeadline(time.Now().Add(ReadTimeOut))
 	_, err := udpConn.Read(buf[0:])
 
 	if err != nil {
 		asyncSendUDP(data, part, udpConn)
-		go retrySendUDPCommon(data, part, udpConn, wg)
+		go retrySendUDP(data, part, udpConn, wg)
 	} else {
 		wg.Done()
 	}

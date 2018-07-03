@@ -5,7 +5,6 @@ import (
 	"net"
 	"strconv"
 	"io/ioutil"
-	"sync"
 	"encoding/binary"
 	"udp-go/Workspace/pkg/myLib"
 )
@@ -24,15 +23,25 @@ var (
 	udpAddr *net.UDPAddr
 	pc *net.UDPConn
 	arr = make([]string, 0)
-	clientMutex = make(map[string]*sync.Mutex)
 	clientFiles =  make(map[string][][]byte)
 	clientSizes = make(map[string]int)
 )
+
+type client struct {
+	clientFiles map[string][][]byte
+	clientSizes map[string]int
+}
 
 func main() {
 	initServer()
 	readUDP()
 }
+
+func Packet() {
+
+}
+
+
 
 func initServer() {
 	udpAddr , err := net.ResolveUDPAddr("udp4", PortServer)
@@ -70,7 +79,6 @@ func processUDP(buffer []byte, remoteAddr *net.UDPAddr) {
 		defer func() {
 			if r := recover(); r == nil {
 				fmt.Println("sending part")
-				//pc.WriteToUDP(partBuffer, clientAckAddrs[string(id)])
 				pc.WriteToUDP(partBuffer, remoteAddr)
 			} else {
 				fmt.Println("panic happend but recovered!!!!")
@@ -98,14 +106,11 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 	} else if string(id) == DefaultId {
 
 		newId := myLib.RandStringRunes(IdSize)
-		var mx sync.Mutex
-		clientMutex[string(newId)] = &mx
 		pc.WriteToUDP([]byte(newId), remoteAddr)
 
 	} else if size, err := strconv.Atoi(trimNullString(data)); err == nil {
 
 		clientSizes[string(id)] = size
-
 
 		if size < DataSize {
 			clientFiles[string(id)] = make([][]byte, 1)
@@ -123,18 +128,6 @@ func specialMessageHandler(data, id, partBuffer []byte, remoteAddr *net.UDPAddr)
 }
 
 func putInArray(id, data []byte, part int) {
-	//mx := clientMutex[string(id)]
-	//mx.Lock()
-	//clientPart := clientFiles[string(id)]
-	////mx.Unlock()
-	//
-	//clientPart = append(clientPart[0:part*DataSize],
-	//				append(data, clientPart[(part+1)*DataSize:]...)...)
-	//
-	////mx.Lock()
-	//clientFiles[string(id)] = clientPart
-	//mx.Unlock()
-
 	clientFiles[string(id)][part] = data
 }
 
